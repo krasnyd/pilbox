@@ -329,7 +329,7 @@ class Image(object):
         if min(current_x, current_y) > min(target_x, target_y):
             return
 
-        if target_x > target_y:
+        if current_x > current_y:
             # y is lower
             size = self._get_size(None, target_y)
         else:
