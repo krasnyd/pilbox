@@ -71,7 +71,7 @@ _formats_to_pil = {
 class Image(object):
     FILTERS = _filters_to_pil.keys()
     FORMATS = _formats_to_pil.keys()
-    MODES = ["adapt", "clip", "crop", "fill", "scale", "fit"]
+    MODES = ["adapt", "clip", "crop", "fill", "scale", "min"]
     POSITIONS = _positions_to_ratios.keys()
 
     _DEFAULTS = dict(background="0fff", expand=False, filter="antialias",
@@ -201,8 +201,8 @@ class Image(object):
             self._fill(size, opts)
         elif opts["mode"] == "scale":
             self._scale(size, opts)
-        elif opts["mode"] == "fit":
-            self._fit(size, opts)
+        elif opts["mode"] == "min":
+            self._min(size, opts)
         else:
             self._crop(size, opts)
         return self
@@ -316,7 +316,7 @@ class Image(object):
     def _clip(self, size, opts):
         self.img.thumbnail(size, opts["pil"]["filter"])
 
-    def _fit(self, size, opts):
+    def _min(self, size, opts):
         source_aspect_ratio = float(self.img.size[0]) / float(self.img.size[1])
         aspect_ratio = float(size[0]) / float(size[1])
 

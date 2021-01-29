@@ -75,6 +75,9 @@ Or from source
 ::
 
     $ git clone https://github.com/agschwender/pilbox.git
+    $ python3 -m venv env
+    $ source env/bin/activate
+    $ pip install .
 
 Running
 =======
@@ -193,7 +196,7 @@ Resize Parameters
 
 -  *w*: The desired width of the image
 -  *h*: The desired height of the image
--  *mode*: The resizing method: adapt, clip, crop (default), fill and scale
+-  *mode*: The resizing method: adapt, clip, crop (default), fill, scale and min
 
    -  *adapt*: Resize using crop if the resized image retains a supplied
       percentage of the original image; otherwise fill
@@ -204,6 +207,7 @@ Resize Parameters
    -  *fill*: Fills the clipped space with a background color
    -  *scale*: Resize to fit within the desired region, ignoring aspect
       ratio
+   -  *min*: Keep aspect ratio and use width and height as minimal required resolution
 
 -  *bg*: Background color used with fill mode (RGB or ARGB)
 
@@ -371,6 +375,11 @@ This mode is largely included for completeness.
 .. figure:: https://github.com/agschwender/pilbox/raw/master/pilbox/test/data/expected/example-500x400-mode=scale.jpg
     :align: center
     :alt: Scale image
+
+Min
+-----
+
+Keep aspect ratio and use width and height as minimal required resolution.
 
 Signing
 =======
