@@ -326,7 +326,7 @@ class Image(object):
         current_x = float(self.img.size[0])
         current_y = float(self.img.size[1])
 
-        if min(current_x, current_y) > min(target_x, target_y):
+        if current_x > target_x and current_y > target_y:
             return
 
         if current_x > current_y:
