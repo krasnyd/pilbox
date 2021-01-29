@@ -201,6 +201,8 @@ class Image(object):
             self._fill(size, opts)
         elif opts["mode"] == "scale":
             self._scale(size, opts)
+        elif opts["mode"] == "fit":
+            self._fit(size, opts)
         else:
             self._crop(size, opts)
         return self
@@ -313,6 +315,27 @@ class Image(object):
 
     def _clip(self, size, opts):
         self.img.thumbnail(size, opts["pil"]["filter"])
+
+    def _fit(self, size, opts):
+        source_aspect_ratio = float(self.img.size[0]) / float(self.img.size[1])
+        aspect_ratio = float(size[0]) / float(size[1])
+
+        target_x = float(size[0])
+        target_y = float(size[1])
+
+        current_x = float(self.img.size[0])
+        current_y = float(self.img.size[1])
+
+        if min(current_x, current_y) > min(target_x, target_y):
+            return
+
+        if target_x > target_y:
+            # y is lower
+            size = self._get_size(None, target_y)
+        else:
+            size = self._get_size(target_x, None)
+
+        self._crop(size, opts)
 
     def _background(self, fmt, color):
         if self._skip_background:
