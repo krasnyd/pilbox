@@ -71,7 +71,7 @@ _formats_to_pil = {
 class Image(object):
     FILTERS = _filters_to_pil.keys()
     FORMATS = _formats_to_pil.keys()
-    MODES = ["adapt", "clip", "crop", "fill", "scale"]
+    MODES = ["adapt", "clip", "crop", "fill", "scale", "fit"]
     POSITIONS = _positions_to_ratios.keys()
 
     _DEFAULTS = dict(background="0fff", expand=False, filter="antialias",
